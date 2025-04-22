@@ -1,11 +1,12 @@
 import pandas as pd
 import numpy as np
 
-# 데이터 불러오기
+# 대용량 train.csv -> train.parquet 으로 변환환
 # train = pd.read_csv('../data/raw/train.csv')
 # train.to_parquet("../data/raw/train.parquet", compression="snappy")
 # train.sample(10, random_state=42).to_csv("../data/sample_train.csv", index=False)
 
+# 데이터 불러오기기
 train = pd.read_parquet('../data/raw/train.parquet')
 train.head(5)
 
