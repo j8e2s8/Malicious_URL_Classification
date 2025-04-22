@@ -1,0 +1,63 @@
+---
+title: "악성 URL 분류"
+author: "Datanauts"
+format:
+  dashboard:
+    nav-buttons: 
+      - icon: github
+        href: https://github.com/j8e2s8/Malicious_URL_Classification
+    scrolling: true
+logo: "datanauts_logo.png"
+---
+
+# 개요
+
+## 사이드바 페이지 {.sidebar}
+
+### 팀
+- 팀명 : Datanauts
+- 팀원 : 이용규, 정은서서
+
+
+### 데이터
+- [데이콘](https://github.com/j8e2s8/Malicious_URL_Classification/tree/main/data/raw)
+
+
+## tab {.tabset}
+
+### 분석 목적
+
+인터넷의 급속한 확산과 함께 악성 URL을 통해 발생하는 사이버 공격이 급증하고 있습니다. 
+
+이러한 악성 URL은 개인정보 탈취, 금융 사기, 악성 코드 배포 등 다양한 방식으로 사용자들에게 피해를 주고 있습니다. 
+
+저희는 URL의 텍스트 정보만으로 특징을 추출하고, 악성 여부를 분류하는 AI 알고리즘을 개발하는 것을 목표로 합니다. 
+
+
+
+### 데이터 설명
+train set 크기 : (6995056, 3) <br>
+test set 크기 : (1747689, 2) <br>
+
+label 0 : 정상 URL <br>
+label 1 : 악성 URL <br>
+
+악성 URL일 확률을 예측함. <br>
+
+
+```{python}
+#| component: table
+#| title: 'train set'
+import pandas as pd
+train = pd.read_csv('../data/raw/train.csv')
+train.head(5)
+```
+
+```{python}
+#| component: table
+#| title: 'test set'
+import pandas as pd
+test = pd.read_csv('../data/raw/test.csv')
+test.head(5)
+```
+
