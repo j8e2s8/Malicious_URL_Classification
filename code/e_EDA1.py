@@ -24,13 +24,23 @@ test = pd.read_csv('../data/raw/test.csv')
 submission = pd.read_csv('../data/raw/sample_submission.csv')
 #submission.head(5)
 
-
+# 데이터 전처리
 train2 = train.copy()
 train2['URL'] = train2['URL'].str.replace('[.]','.')
 train2['URL'] = train2['URL'].str.strip("'")
 
+# 대문자 여부 파생변수
+train2['is_capital'] = train2['URL'].str.contains(r'[A-Z]', regex=True)
 
+# 악성일 가능성이 높은 요소들의 True False 파생변수
+# . or - or _ 로 IP 스타일, 인코딩, 공백, 영어 외 언어, 유효한 특수문자 (! , @ , # , % , $ , & , * , ( , ) , _ , + , - , = , [ , ] , ' , \ , : , " , , , / , ? , `)
+train2['is_factor'] = train2['URL'].str.contains(r'\b\d{1,3}(\.\d{1,3}){3}\b|\b\d{1,3}(\-\d{1,3}){3}\b|\b\d{1,3}(\_\d{1,3}){3}\b', regex=True) \
+						| train2['URL'].str.contains(r'[^a-zA-Z0-9\n\t\^{};|<>~\.]', regex=True )
+
+# 경로 수 파생변수
 train2['count_/'] = train2['URL'].str.count(r'[/]')
+
+# 특수문자 수 파생변수
 train2['count_sc'] = train2['URL'].str.count(r'[!@#$%&*()_+\-=\[\]\'\\:",?`]')
 
 
@@ -152,7 +162,6 @@ Derive(train2,A, 'C')
 # False : 0.964 비율 , True : 0.036 비율   (이 정도 비율은 Cramér's V 값이 괜찮게 나오나봄)
 a = train2['URL'].str.contains(r'[A-Z]', regex=True).value_counts(normalize=True)
 print(f"False : {a[0]:.3f} 비율 , True : {a[1]:.3f} 비율")
-
 
 
 
