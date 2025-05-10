@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-train.csv
-=======
 train.csv
 train.parquet
->>>>>>> 53eb352 (arrangement)
+eda_train.parquet
